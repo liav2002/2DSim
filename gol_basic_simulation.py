@@ -1,10 +1,12 @@
 import time
+import os
 
 from Grid import Grid
 
+ON_PYCHARM = False
 WIDTH = 20
 HEIGHT = 11
-TOTAL_GENERATIONS = 20
+TOTAL_GENERATIONS = 5
 DELAY_BETWEEN_GENERATIONS = 0.5
 TEMPLATE_PATTERN = [[False] * 20,
                     [False] * 20,
@@ -34,20 +36,26 @@ def next_generation():
 
 
 def print_grid():
+    if not ON_PYCHARM:
+        os.system("cls")
+    else:
+        print("\n" * 100)
+
     for row in grid.cells:
         for cell in row:
             if cell.is_alive:
                 print("0", end=" ")
             else:
-                print(". ", end=" ")
+                print(".", end=" ")
         print("\n")
 
 
 def run(generations, delay):
     for generation in range(generations):
-        print(f"Generation {generation + 1}:")
         next_generation()
         time.sleep(delay)
+
+    print("\n\nDONE!\n\n")
 
 
 def main():
