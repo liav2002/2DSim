@@ -11,5 +11,5 @@ class BasicCell(Cell):
         if self.is_alive and (alive_neighbors < 2 or alive_neighbors > 3):
                 self.kill()
 
-        elif alive_neighbors == 3:
+        elif not self.is_alive and alive_neighbors == 3:
             self.revival()
