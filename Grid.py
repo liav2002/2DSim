@@ -1,18 +1,35 @@
 from Cells.BasicCell import BasicCell
+from Cells.PlantCell import PlantCell
+import yaml
+import random
+
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
 
 
 class Grid:
     def __init__(self, width, height, cells_map):
         self.width = width
         self.height = height
-
         self.cells = []
-        for row in cells_map:
+        self.init_board(cells_map)
+
+    def init_board(self, cells_map):
+        empty_cells_position = []
+        num_of_plants = config['NUM_OF_PLANTS']
+
+        for y, row in enumerate(cells_map):
             cell_row = []
-            for state in row:
+            for x, state in enumerate(row):
                 cell = BasicCell(is_alive=bool(state))
                 cell_row.append(cell)
+                if not cell.is_alive: empty_cells_position.append((y, x))
             self.cells.append(cell_row)
+
+        for _ in range(num_of_plants):
+            chosen_empty_cell = random.choice(empty_cells_position)
+            y, x = chosen_empty_cell
+            self.cells[y][x] = PlantCell(is_alive=False)
 
     def get_neighbors(self, cell):
         neighbors = []
@@ -47,7 +64,10 @@ class Grid:
         for row in self.cells:
             for cell in row:
                 neighbors = self.get_neighbors(cell)
-                cell_next = BasicCell(is_alive=cell.is_alive)
+
+                if type(cell) is PlantCell: cell_next = PlantCell(is_alive=False)
+                else: cell_next = BasicCell(is_alive=cell.is_alive)
+
                 cell_next.determine_next_state(neighbors)
                 next_state[self.cells.index(row)][row.index(cell)] = cell_next
 

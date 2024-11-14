@@ -3,6 +3,7 @@ WIDTH: 20
 HEIGHT: 11
 TOTAL_GENERATIONS: 5
 DELAY_BETWEEN_GENERATIONS: 0.5
+NUM_OF_PLANTS: 10
 TEMPLATE_PATTERN:
  - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
  - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]

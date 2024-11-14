@@ -2,6 +2,8 @@ import yaml
 import time
 import os
 
+from Cells.PlantCell import PlantCell
+from Cells.BasicCell import BasicCell
 from Grid import Grid
 
 with open('config.yaml', 'r') as file:
@@ -28,6 +30,7 @@ def next_generation():
     global grid
     grid.update_generation()
     print_grid()
+    input("DEBUG:press any key to continue...")
 
 
 def print_grid():
@@ -38,8 +41,10 @@ def print_grid():
 
     for row in grid.cells:
         for cell in row:
-            if cell.is_alive:
+            if type(cell) is BasicCell and cell.is_alive:
                 print("0", end=" ")
+            elif type(cell) is PlantCell:
+                print("P", end=" ")
             else:
                 print(".", end=" ")
         print("\n")
