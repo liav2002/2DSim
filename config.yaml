@@ -1,0 +1,17 @@
+ON_PYCHARM: False
+WIDTH: 20
+HEIGHT: 11
+TOTAL_GENERATIONS: 5
+DELAY_BETWEEN_GENERATIONS: 0.5
+TEMPLATE_PATTERN:
+ - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+ - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+ - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+ - [False, False, False, False, False, False, False, True, False, True, False, True, False, False, False, False, False, False, False, False]
+ - [False, False, False, False, False, False, True, False, False, False, False, False, True, False, False, False, False, False, False, False]
+ - [False, False, False, False, False, True, False, True, False, False, False, True, False, True, False, False, False, False, False, False]
+ - [False, False, False, False, False, False, True, False, False, False, False, False, True, False, False, False, False, False, False, False]
+ - [False, False, False, False, False, False, False, True, False, True, False, True, False, False, False, False, False, False, False, False]
+ - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+ - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+ - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]

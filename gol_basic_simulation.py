@@ -1,24 +1,18 @@
+import yaml
 import time
 import os
 
 from Grid import Grid
 
-ON_PYCHARM = False
-WIDTH = 20
-HEIGHT = 11
-TOTAL_GENERATIONS = 5
-DELAY_BETWEEN_GENERATIONS = 0.5
-TEMPLATE_PATTERN = [[False] * 20,
-                    [False] * 20,
-                    [False] * 20,
-                    [False] * 7 + [True, False] * 3 + [False] * 7,
-                    [False] * 6 + [True] + [False] * 5 + [True] + [False] * 7,
-                    [False] * 5 + [True, False] * 2 + [False] * 2 + [True, False] * 2 + [False] * 5,
-                    [False] * 6 + [True] + [False] * 5 + [True] + [False] * 7,
-                    [False] * 7 + [True, False] * 3 + [False] * 7,
-                    [False] * 20,
-                    [False] * 20,
-                    [False] * 20]
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
+
+ON_PYCHARM = config['ON_PYCHARM']
+WIDTH = config['WIDTH']
+HEIGHT = config['HEIGHT']
+TOTAL_GENERATIONS = config['TOTAL_GENERATIONS']
+DELAY_BETWEEN_GENERATIONS = config['DELAY_BETWEEN_GENERATIONS']
+TEMPLATE_PATTERN = config['TEMPLATE_PATTERN']
 
 grid = None
 
@@ -27,6 +21,7 @@ def initialize_game(grid_size, pattern):
     global grid
     grid = Grid(grid_size[0], grid_size[1], pattern)
     print_grid()
+    input("press any key to start...")
 
 
 def next_generation():
