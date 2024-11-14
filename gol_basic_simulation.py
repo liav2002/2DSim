@@ -5,6 +5,7 @@ import os
 from Cells.PlantCell import PlantCell
 from Cells.BasicCell import BasicCell
 from Grid import Grid
+from Enums import *
 
 with open('config.yaml', 'r') as file:
     config = yaml.safe_load(file)
@@ -15,6 +16,8 @@ HEIGHT = config['HEIGHT']
 TOTAL_GENERATIONS = config['TOTAL_GENERATIONS']
 DELAY_BETWEEN_GENERATIONS = config['DELAY_BETWEEN_GENERATIONS']
 TEMPLATE_PATTERN = config['TEMPLATE_PATTERN']
+
+
 
 grid = None
 

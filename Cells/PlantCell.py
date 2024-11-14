@@ -3,7 +3,7 @@ from Cells.HerbivoreCell import HerbivoreCell
 
 
 class PlantCell(Cell):
-    def __init__(self, is_alive, TTL):
+    def __init__(self, TTL, is_alive = True):
         super().__init__(is_alive)
         self.TTL = TTL
 

@@ -1,5 +1,7 @@
 from Cells.BasicCell import BasicCell
+from Cells.HerbivoreCell import HerbivoreCell
 from Cells.PlantCell import PlantCell
+from Enums import *
 import yaml
 import random
 
@@ -20,8 +22,14 @@ class Grid:
 
         for y, row in enumerate(cells_map):
             cell_row = []
-            for x, state in enumerate(row):
-                cell = BasicCell(is_alive=bool(state))
+            for x, type in enumerate(row):
+                if type == CELL_TYPE["Basic"]:
+                    cell = BasicCell(is_alive=True)
+                elif type == CELL_TYPE["Herbivore"]:
+                    cell = HerbivoreCell(is_alive=True)
+                else:
+                    cell = BasicCell(is_alive=False)
+
                 cell_row.append(cell)
                 if not cell.is_alive: empty_cells_position.append((y, x))
             self.cells.append(cell_row)
