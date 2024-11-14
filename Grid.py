@@ -29,7 +29,7 @@ class Grid:
         for _ in range(num_of_plants):
             chosen_empty_cell = random.choice(empty_cells_position)
             y, x = chosen_empty_cell
-            self.cells[y][x] = PlantCell(is_alive=False)
+            self.cells[y][x] = PlantCell(is_alive=True, TTL=config["PLANTS_STEPS"])
 
     def get_neighbors(self, cell):
         neighbors = []
@@ -65,7 +65,7 @@ class Grid:
             for cell in row:
                 neighbors = self.get_neighbors(cell)
 
-                if type(cell) is PlantCell: cell_next = PlantCell(is_alive=False)
+                if type(cell) is PlantCell: cell_next = PlantCell(is_alive=True, TTL=config["PLANTS_STEPS"])
                 else: cell_next = BasicCell(is_alive=cell.is_alive)
 
                 cell_next.determine_next_state(neighbors)

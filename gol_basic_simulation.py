@@ -30,7 +30,7 @@ def next_generation():
     global grid
     grid.update_generation()
     print_grid()
-    input("DEBUG:press any key to continue...")
+    # input("DEBUG:press any key to continue...")
 
 
 def print_grid():
@@ -43,7 +43,7 @@ def print_grid():
         for cell in row:
             if type(cell) is BasicCell and cell.is_alive:
                 print("0", end=" ")
-            elif type(cell) is PlantCell:
+            elif type(cell) is PlantCell and cell.is_alive:
                 print("P", end=" ")
             else:
                 print(".", end=" ")
