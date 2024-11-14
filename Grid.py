@@ -1,6 +1,4 @@
-from ctypes.macholib.dyld import dyld_find
-
-from BasicCell import BasicCell
+from Cells.BasicCell import BasicCell
 
 
 class Grid:
@@ -39,7 +37,7 @@ class Grid:
                 break
 
         if x == -1 or y == -1:
-            raise Exception("ERROR <grid.get_cell_position()>: Cell not found")
+            raise Exception("ERROR <grid.get_cell_position()>: Cells not found")
 
         return x, y
 

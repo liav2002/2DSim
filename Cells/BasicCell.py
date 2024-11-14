@@ -1,4 +1,4 @@
-from Cell import Cell
+from Cells.Cell import Cell
 
 class BasicCell(Cell):
     def __init__(self, is_alive):
