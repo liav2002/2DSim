@@ -12,6 +12,8 @@ class PlantCell(Cell):
         if self.is_alive:
             self.TTL -= 1
             if self.TTL == 0:
-                self.kill()
+                self.next_state = "kill"
             elif any(isinstance(cell, HerbivoreCell) for cell in neighbors):
-                self.kill()
+                self.next_state = "kill"
+            else:
+                self.next_state = "none"

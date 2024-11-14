@@ -59,13 +59,11 @@ class Grid:
         return x, y
 
     def update_generation(self):
-        next_state = [[None for _ in range(self.width)] for _ in range(self.height)]
-
         for row in self.cells:
             for cell in row:
                 neighbors = self.get_neighbors(cell)
-                cell_next = CellFactory.create_cell(cell_type=cell.type, cell_state=cell.is_alive)
-                cell_next.determine_next_state(neighbors)
-                next_state[self.cells.index(row)][row.index(cell)] = cell_next
+                cell.determine_next_state(neighbors)
 
-        self.cells = next_state
+        for row in self.cells:
+            for cell in row:
+                cell.update_state()

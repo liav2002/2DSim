@@ -26,21 +26,23 @@ def initialize_game(grid_size, pattern):
     global grid
     grid = Grid(grid_size[0], grid_size[1], pattern)
     print_grid()
+    print("Generation: 0.")
     input("press any key to start...")
 
 
-def next_generation():
+def next_generation(id):
     global grid
     grid.update_generation()
     print_grid()
-    # input("DEBUG:press any key to continue...")
+    print(f"Generation: {id + 1}.")
+    input("DEBUG:press any key to continue...")
 
 
 def print_grid():
-    if not ON_PYCHARM:
-        os.system("cls")
-    else:
-        print("\n" * 100)
+    # if not ON_PYCHARM:
+    #     os.system("cls")
+    # else:
+    #     print("\n" * 100)
 
     for row in grid.cells:
         for cell in row:
@@ -50,7 +52,7 @@ def print_grid():
 
 def run(generations, delay):
     for generation in range(generations):
-        next_generation()
+        next_generation(id = generation + 1)
         time.sleep(delay)
 
     print("\n\nDONE!\n\n")
