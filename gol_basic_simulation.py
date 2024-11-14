@@ -44,12 +44,7 @@ def print_grid():
 
     for row in grid.cells:
         for cell in row:
-            if type(cell) is BasicCell and cell.is_alive:
-                print("0", end=" ")
-            elif type(cell) is PlantCell and cell.is_alive:
-                print("P", end=" ")
-            else:
-                print(".", end=" ")
+            print(CELL_CHARACTER[cell.type] if cell.is_alive else ".", end=" ")
         print("\n")
 
 

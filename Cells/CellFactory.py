@@ -13,17 +13,17 @@ with open('config.yaml', 'r') as file:
 
 class CellFactory:
     @staticmethod
-    def create_cell(cell_type: str) -> Cell:
+    def create_cell(cell_type: str, cell_state = True) -> Cell:
         if cell_type == "Basic":
             return BasicCell(is_alive=True)
         elif cell_type == "Empty":
             return BasicCell(is_alive=False)
         elif cell_type == "Plant":
-            return PlantCell(TTL=config["PLANTS_STEPS"])
+            return PlantCell(TTL=config["PLANTS_STEPS"], is_alive=cell_state)
         elif cell_type == "Herbivore":
-            return HerbivoreCell(TTL=config["HERBIVORE_STEPS"])
+            return HerbivoreCell(TTL=config["HERBIVORE_STEPS"], is_alive=cell_state)
         elif cell_type == "Predator":
-            return PredatorCell(TTL=config["PREDATOR_STEPS"])
+            return PredatorCell(TTL=config["PREDATOR_STEPS"], is_alive=cell_state)
         elif cell_type == "Rock":
             return RockCell()
         elif cell_type == "Tree":

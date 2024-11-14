@@ -1,21 +1,21 @@
-ON_PYCHARM: False
+ON_PYCHARM: "Empty"
 WIDTH: 20
 HEIGHT: 11
 TOTAL_GENERATIONS: 5
 DELAY_BETWEEN_GENERATIONS: 0.5
 NUM_OF_PLANTS: 10
-PLANTS_STEPS: 25
+PLANTS_STEPS: 2
 HERBIVORE_STEPS: 15
 PREDATOR_STEPS: 10
 TEMPLATE_PATTERN:
- - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
- - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
- - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
- - [False, False, False, False, False, False, False, True, False, True, False, True, False, False, False, False, False, False, False, False]
- - [False, False, False, False, False, False, True, False, False, False, False, False, True, False, False, False, False, False, False, False]
- - [False, False, False, False, False, True, False, True, False, False, False, True, False, True, False, False, False, False, False, False]
- - [False, False, False, False, False, False, True, False, False, False, False, False, True, False, False, False, False, False, False, False]
- - [False, False, False, False, False, False, False, True, False, True, False, True, False, False, False, False, False, False, False, False]
- - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
- - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
- - [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Basic", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Basic", "Empty", "Empty", "Empty", "Basic", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Basic", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]

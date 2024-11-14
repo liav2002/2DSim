@@ -1,6 +1,4 @@
-from Cells.BasicCell import BasicCell
-from Cells.HerbivoreCell import HerbivoreCell
-from Cells.PlantCell import PlantCell
+from Cells.CellFactory import CellFactory
 from Enums import *
 import yaml
 import random
@@ -22,14 +20,8 @@ class Grid:
 
         for y, row in enumerate(cells_map):
             cell_row = []
-            for x, type in enumerate(row):
-                if type == CELL_TYPE["Basic"]:
-                    cell = BasicCell(is_alive=True)
-                elif type == CELL_TYPE["Herbivore"]:
-                    cell = HerbivoreCell(is_alive=True)
-                else:
-                    cell = BasicCell(is_alive=False)
-
+            for x, cell_type in enumerate(row):
+                cell = CellFactory.create_cell(cell_type)
                 cell_row.append(cell)
                 if not cell.is_alive: empty_cells_position.append((y, x))
             self.cells.append(cell_row)
@@ -37,7 +29,7 @@ class Grid:
         for _ in range(num_of_plants):
             chosen_empty_cell = random.choice(empty_cells_position)
             y, x = chosen_empty_cell
-            self.cells[y][x] = PlantCell(is_alive=True, TTL=config["PLANTS_STEPS"])
+            self.cells[y][x] = CellFactory.create_cell(cell_type="Plant")
 
     def get_neighbors(self, cell):
         neighbors = []
@@ -72,10 +64,7 @@ class Grid:
         for row in self.cells:
             for cell in row:
                 neighbors = self.get_neighbors(cell)
-
-                if type(cell) is PlantCell: cell_next = PlantCell(is_alive=True, TTL=config["PLANTS_STEPS"])
-                else: cell_next = BasicCell(is_alive=cell.is_alive)
-
+                cell_next = CellFactory.create_cell(cell_type=cell.type, cell_state=cell.is_alive)
                 cell_next.determine_next_state(neighbors)
                 next_state[self.cells.index(row)][row.index(cell)] = cell_next
 

@@ -6,6 +6,7 @@ class PlantCell(Cell):
     def __init__(self, TTL, is_alive = True):
         super().__init__(is_alive)
         self.TTL = TTL
+        self.type = "Plant"
 
     def determine_next_state(self, neighbors):
         if self.is_alive:
