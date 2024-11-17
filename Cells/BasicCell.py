@@ -1,12 +1,13 @@
+from typing import List
 from Cells.Cell import Cell
 
 class BasicCell(Cell):
-    def __init__(self, is_alive):
-        super().__init__(is_alive)
+    def __init__(self, is_alive: bool, y: int, x: int) -> None:
+        super().__init__(is_alive=is_alive, y=y, x=x)
         self.type = "Basic"
 
 
-    def determine_next_state(self, neighbors):
+    def determine_next_state(self, neighbors: List[Cell]) -> None:
         alive_neighbors = sum([1 for neighbor in neighbors if neighbor.is_alive])
 
         if self.is_alive and (alive_neighbors < 2 or alive_neighbors > 3):

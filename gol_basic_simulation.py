@@ -2,6 +2,7 @@ import yaml
 import time
 import os
 
+from typing import Tuple
 from Cells.PlantCell import PlantCell
 from Cells.BasicCell import BasicCell
 from Grid import Grid
@@ -22,23 +23,23 @@ TEMPLATE_PATTERN = config['TEMPLATE_PATTERN']
 grid = None
 
 
-def initialize_game(grid_size, pattern):
+def initialize_game(grid_size: Tuple[int, int], pattern: List[List[str]]) -> None:
     global grid
-    grid = Grid(grid_size[0], grid_size[1], pattern)
+    grid = Grid(width=grid_size[0], height=grid_size[1], cells_map=pattern)
     print_grid()
     print("Generation: 0.")
     input("press any key to start...")
 
 
-def next_generation(id):
+def next_generation(_id: int) -> None:
     global grid
     grid.update_generation()
     print_grid()
-    print(f"Generation: {id + 1}.")
+    print(f"Generation: {_id + 1}.")
     input("DEBUG:press any key to continue...")
 
 
-def print_grid():
+def print_grid() -> None:
     # if not ON_PYCHARM:
     #     os.system("cls")
     # else:
@@ -50,16 +51,16 @@ def print_grid():
         print("\n")
 
 
-def run(generations, delay):
+def run(generations: int, delay: float) -> None:
     for generation in range(generations):
-        next_generation(id = generation + 1)
+        next_generation(_id = generation + 1)
         time.sleep(delay)
 
     print("\n\nDONE!\n\n")
 
 
 def main():
-    initialize_game((WIDTH, HEIGHT), TEMPLATE_PATTERN)
+    initialize_game(grid_size=(WIDTH, HEIGHT), pattern=TEMPLATE_PATTERN)
     run(generations=TOTAL_GENERATIONS, delay=DELAY_BETWEEN_GENERATIONS)
 
 
