@@ -2,9 +2,8 @@ from typing import List
 from Cells.Cell import Cell
 
 class BasicCell(Cell):
-    def __init__(self, is_alive: bool, y: int, x: int) -> None:
-        super().__init__(is_alive=is_alive, y=y, x=x)
-        self.type = "Basic"
+    def __init__(self, is_alive: bool, y: int, x: int, cell_type="Basic") -> None:
+        super().__init__(is_alive=is_alive, y=y, x=x, cell_type=cell_type)
 
 
     def determine_next_state(self, neighbors: List[Cell]) -> None:

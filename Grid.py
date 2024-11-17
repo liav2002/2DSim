@@ -35,21 +35,47 @@ class Grid:
 
     def get_neighbors(self, cell: Cell) -> List[Cell]:
         neighbors = []
+        x, y = cell.x, cell.y
 
         for dx in [-1, 0, 1]:
             for dy in [-1, 0, 1]:
                 if dx != 0 or dy != 0:
-                    nx, ny = cell.x + dx, cell.y + dy
+                    nx, ny = x + dx, y + dy
                     if 0 <= nx < self.width and 0 <= ny < self.height:
                         neighbors.append(self.cells[ny][nx])
 
         return neighbors
 
     def sub_grib_by_cell_sight(self, cell: Cell) -> List[List[Cell]]:
-        pass
+        if not isinstance(cell, MovableCell):
+            raise ValueError("Only MovableCell instances can use this method.")
+
+        x, y, sight = cell.x, cell.y, cell.sight
+        start_row = max(0, y - sight)
+        end_row = min(self.height, y + sight + 1)
+        start_col = max(0, x - sight)
+        end_col = min(self.width, x + sight + 1)
+
+        sub_grid = [
+            self.cells[row][start_col:end_col]
+            for row in range(start_row, end_row)
+        ]
+
+        return sub_grid
 
     def swap_cells(self, x1: int, y1: int, x2: int, y2: int) -> None:
-        pass
+        print(f"Swap between ({y1}, {x1}) to ({y2}, {x2}).")
+
+        if not (0 <= x1 < self.width and 0 <= y1 < self.height):
+            raise ValueError(f"Coordinates ({y1}, {x1}) are out of bounds.")
+        if not (0 <= x2 < self.width and 0 <= y2 < self.height):
+            raise ValueError(f"Coordinates ({y2}, {x2}) are out of bounds.")
+
+        cell1 = self.cells[y1][x1]
+        cell2 = self.cells[y2][x2]
+        self.cells[y1][x1], self.cells[y2][x2] = cell2, cell1
+        cell1.x, cell1.y = x2, y2
+        cell2.x, cell2.y = x1, y1
 
     def update_generation(self) -> None:
         for row in self.cells:
@@ -58,11 +84,12 @@ class Grid:
                 cell.determine_next_state(neighbors=neighbors)
                 if isinstance(cell, MovableCell):
                     cell.determine_next_pos(sub_grid=self.sub_grib_by_cell_sight(cell=cell))
+                    print(f"DUBUG: cell_type = {cell.cell_type}, current_pos = ({cell.y}, {cell.x}), next_pos = ({cell.next_y}, {cell.next_x})")
 
         for row in self.cells:
             for cell in row:
                 cell.update_state()
 
-                # TODO: save current indexes and next indexes for movable cell
-                # if isinstance(cell, MovableCell):
-                    #self.swap_cells()
+                if isinstance(cell, MovableCell) and cell.move:
+                    self.swap_cells(x1=cell.x, y1=cell.y, x2=cell.next_x, y2=cell.next_y)
+                    cell.reset_next_pos()

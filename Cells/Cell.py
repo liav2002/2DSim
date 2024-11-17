@@ -1,9 +1,10 @@
 from typing import List
 
 class Cell:
-    def __init__(self, y: int, x: int, is_alive=True) -> None:
+    def __init__(self, y: int, x: int, cell_type: str, is_alive=True) -> None:
         self.is_alive = is_alive
         self.next_state = None
+        self.cell_type = cell_type
         self.y = y
         self.x = x
 
@@ -24,9 +25,17 @@ class Cell:
 
 
 class MovableCell(Cell):
-    def __init__(self, y: int, x: int, sight: int, is_alive=True) -> None:
-        super().__init__(is_alive=is_alive, y=y, x=x)
+    def __init__(self, y: int, x: int, sight: int, cell_type: str, is_alive=True) -> None:
+        super().__init__(is_alive=is_alive, y=y, x=x, cell_type=cell_type)
         self.sight = sight
+        self.next_x = -1
+        self.next_y = -1
+        self.move = False
+
+    def reset_next_pos(self) -> None:
+        self.next_x = -1
+        self.next_y = -1
+        self.move = False
 
     def determine_next_pos(self, sub_grid: List[List[Cell]]) -> None:
         raise Exception("Should have implemented this")
