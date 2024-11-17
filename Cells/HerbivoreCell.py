@@ -15,12 +15,12 @@ class HerbivoreCell(MovableCell):
             if self.TTL == 0:
                 self.next_state = "kill"
                 return
-            elif any(cell.cell_type == "Predator" for cell in neighbors):
+            elif any(cell.cell_type == "Predator" and cell.is_alive  for cell in neighbors):
                 print(f"DEBUG: Predator eat Herbivore at ({self.y}, {self.x})")
                 self.next_state = "kill"
 
     def try_reproduce(self, neighbors: List[Cell]) -> None:
-        if any(cell.cell_type == "Herbivore" for cell in neighbors):
+        if any(cell.cell_type == "Herbivore" and cell.is_alive for cell in neighbors):
             empty_neighbors = [
                 (neighbor.y, neighbor.x)
                 for neighbor in neighbors
