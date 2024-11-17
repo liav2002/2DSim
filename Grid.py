@@ -35,30 +35,15 @@ class Grid:
 
     def get_neighbors(self, cell: Cell) -> List[Cell]:
         neighbors = []
-        x, y = self.get_cell_position(cell=cell)
 
         for dx in [-1, 0, 1]:
             for dy in [-1, 0, 1]:
                 if dx != 0 or dy != 0:
-                    nx, ny = x + dx, y + dy
+                    nx, ny = cell.x + dx, cell.y + dy
                     if 0 <= nx < self.width and 0 <= ny < self.height:
                         neighbors.append(self.cells[ny][nx])
 
         return neighbors
-
-    def get_cell_position(self, cell: Cell) -> Tuple[int, int]:
-        x = -1
-        y = -1
-
-        for y, row in enumerate(self.cells):
-            if cell in row:
-                x = row.index(cell)
-                break
-
-        if x == -1 or y == -1:
-            raise Exception("ERROR <grid.get_cell_position()>: Cells not found")
-
-        return x, y
 
     def sub_grib_by_cell_sight(self, cell: Cell) -> List[List[Cell]]:
         pass
