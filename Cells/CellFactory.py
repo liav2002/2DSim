@@ -8,8 +8,16 @@ from Cells.RockCell import RockCell
 from Cells.TreeCell import TreeCell
 import yaml
 
-with open('config.yaml', 'r') as file:
-    config = yaml.safe_load(file)
+with open('config/plant_config.yaml', 'r') as file:
+    plant_config = yaml.safe_load(file)
+
+with open('config/herbivore_config.yaml', 'r') as file:
+    herbivore_config = yaml.safe_load(file)
+
+with open('config/predator_config.yaml', 'r') as file:
+    predator_config = yaml.safe_load(file)
+
+
 
 
 class CellFactory:
@@ -20,11 +28,11 @@ class CellFactory:
         elif cell_type == "Empty":
             return BasicCell(is_alive=False, y=position[0], x=position[1], is_reproducible=False)
         elif cell_type == "Plant":
-            return PlantCell(TTL=config["PLANTS_STEPS"], is_alive=cell_state, y=position[0], x=position[1])
+            return PlantCell(TTL=plant_config["PLANTS_STEPS"], is_alive=cell_state, y=position[0], x=position[1])
         elif cell_type == "Herbivore":
-            return HerbivoreCell(TTL=config["HERBIVORE_LIFE_STEPS"], is_alive=cell_state, y=position[0], x=position[1], sight=config["HERBIVORE_SIGHT"])
+            return HerbivoreCell(TTL=herbivore_config["HERBIVORE_LIFE_STEPS"], is_alive=cell_state, y=position[0], x=position[1], sight=herbivore_config["HERBIVORE_SIGHT"])
         elif cell_type == "Predator":
-            return PredatorCell(TTL=config["PREDATOR_LIFE_STEPS"], is_alive=cell_state, y=position[0], x=position[1], sight=config["PREDATOR_SIGHT"])
+            return PredatorCell(TTL=predator_config["PREDATOR_LIFE_STEPS"], is_alive=cell_state, y=position[0], x=position[1], sight=predator_config["PREDATOR_SIGHT"])
         elif cell_type == "Rock":
             return RockCell(y=position[0], x=position[1])
         elif cell_type == "Tree":

@@ -8,15 +8,21 @@ from Cells.BasicCell import BasicCell
 from Grid import Grid
 from Enums import *
 
-with open('config.yaml', 'r') as file:
-    config = yaml.safe_load(file)
+with open('config/game_config.yaml', 'r') as file:
+    game_config = yaml.safe_load(file)
 
-ON_PYCHARM = config['ON_PYCHARM']
-WIDTH = config['WIDTH']
-HEIGHT = config['HEIGHT']
-TOTAL_GENERATIONS = config['TOTAL_GENERATIONS']
-DELAY_BETWEEN_GENERATIONS = config['DELAY_BETWEEN_GENERATIONS']
-TEMPLATE_PATTERN = config['TEMPLATE_PATTERN']
+with open('config/patterns.yaml', 'r') as file:
+    patterns = yaml.safe_load(file)
+
+
+
+ON_PYCHARM = game_config['ON_PYCHARM']
+WIDTH = game_config['WIDTH']
+HEIGHT = game_config['HEIGHT']
+TOTAL_GENERATIONS = game_config['TOTAL_GENERATIONS']
+DELAY_BETWEEN_GENERATIONS = game_config['DELAY_BETWEEN_GENERATIONS']
+
+TEMPLATE_PATTERN = patterns['TEMPLATE_PATTERN']
 
 
 

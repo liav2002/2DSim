@@ -5,8 +5,14 @@ from Enums import *
 import yaml
 import random
 
-with open('config.yaml', 'r') as file:
-    config = yaml.safe_load(file)
+with open('config/game_config.yaml', 'r') as file:
+    game_config = yaml.safe_load(file)
+
+with open('config/herbivore_config.yaml', 'r') as file:
+    herbivore_config = yaml.safe_load(file)
+
+with open('config/plant_config.yaml', 'r') as file:
+    plant_config = yaml.safe_load(file)
 
 
 class Grid:
@@ -16,11 +22,11 @@ class Grid:
         self.cells = []
         self.init_board(cells_map=cells_map)
         self.can_we_produce_herbivores = True
-        self.cooldown_for_herbivores = config["HERBIVORE_COOLDOWN_STEPS"]
+        self.cooldown_for_herbivores = herbivore_config["HERBIVORE_COOLDOWN_STEPS"]
 
     def init_board(self, cells_map: List[List[Cell]]):
         empty_cells_position = []
-        num_of_plants = config['NUM_OF_PLANTS']
+        num_of_plants = plant_config['NUM_OF_PLANTS']
 
         for y, row in enumerate(cells_map):
             cell_row = []
@@ -106,7 +112,7 @@ class Grid:
                         cell.next_state = "none"
                         cell.spawn_position = None
                         self.can_we_produce_herbivores = False
-                        self.cooldown_for_herbivores = config["HERBIVORE_COOLDOWN_STEPS"]
+                        self.cooldown_for_herbivores = herbivore_config["HERBIVORE_COOLDOWN_STEPS"]
 
                     elif self.cooldown_for_herbivores == 0:
                         self.can_we_produce_herbivores = True
