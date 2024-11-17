@@ -24,8 +24,9 @@ class Cell:
 
 
 class MovableCell(Cell):
-    def __init__(self, y: int, x: int, is_alive=True) -> None:
+    def __init__(self, y: int, x: int, sight: int, is_alive=True) -> None:
         super().__init__(is_alive=is_alive, y=y, x=x)
+        self.sight = sight
 
     def determine_next_pos(self, sub_grid: List[List[Cell]]) -> None:
         raise Exception("Should have implemented this")

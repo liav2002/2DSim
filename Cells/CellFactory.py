@@ -22,9 +22,9 @@ class CellFactory:
         elif cell_type == "Plant":
             return PlantCell(TTL=config["PLANTS_STEPS"], is_alive=cell_state, y=position[0], x=position[1])
         elif cell_type == "Herbivore":
-            return HerbivoreCell(TTL=config["HERBIVORE_STEPS"], is_alive=cell_state, y=position[0], x=position[1])
+            return HerbivoreCell(TTL=config["HERBIVORE_STEPS"], is_alive=cell_state, y=position[0], x=position[1], sight=config["HERBIVORE_SIGHT"])
         elif cell_type == "Predator":
-            return PredatorCell(TTL=config["PREDATOR_STEPS"], is_alive=cell_state, y=position[0], x=position[1])
+            return PredatorCell(TTL=config["PREDATOR_STEPS"], is_alive=cell_state, y=position[0], x=position[1], sight=config["PREDATOR_SIGHT"])
         elif cell_type == "Rock":
             return RockCell(y=position[0], x=position[1])
         elif cell_type == "Tree":

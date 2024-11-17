@@ -2,8 +2,8 @@ from Cells.Cell import *
 from typing import List
 
 class HerbivoreCell(MovableCell):
-    def __init__(self, TTL: int, y: int, x: int, is_alive = True) -> None:
-        super().__init__(is_alive,y ,x)
+    def __init__(self, TTL: int, y: int, x: int, sight: int, is_alive = True) -> None:
+        super().__init__(is_alive=is_alive,y=y ,x=x, sight=sight)
         self.TTL = TTL
         self.type = "Herbivore"
 
