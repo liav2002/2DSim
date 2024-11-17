@@ -88,7 +88,7 @@ class Grid:
 
                 if isinstance(cell, MovableCell):
                     cell.determine_next_pos(sub_grid=self.sub_grib_by_cell_sight(cell=cell))
-                    print(f"DUBUG: cell_type = {cell.cell_type}, current_pos = ({cell.y}, {cell.x}), next_pos = ({cell.next_y}, {cell.next_x})")
+                    print(f"DEBUG: cell_type = {cell.cell_type}, current_pos = ({cell.y}, {cell.x}), next_pos = ({cell.next_y}, {cell.next_x})")
 
                 if cell.cell_type == "Herbivore" and self.can_we_produce_herbivores:
                     cell.try_reproduce(neighbors=neighbors)
