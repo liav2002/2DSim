@@ -16,9 +16,9 @@ class CellFactory:
     @staticmethod
     def create_cell(cell_type: str, position: Tuple[int, int], cell_state = True) -> Cell:
         if cell_type == "Basic":
-            return BasicCell(is_alive=True, y=position[0], x=position[1])
+            return BasicCell(is_alive=True, y=position[0], x=position[1], is_reproducible=False)
         elif cell_type == "Empty":
-            return BasicCell(is_alive=False, y=position[0], x=position[1])
+            return BasicCell(is_alive=False, y=position[0], x=position[1], is_reproducible=False)
         elif cell_type == "Plant":
             return PlantCell(TTL=config["PLANTS_STEPS"], is_alive=cell_state, y=position[0], x=position[1])
         elif cell_type == "Herbivore":

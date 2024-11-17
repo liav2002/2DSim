@@ -47,7 +47,7 @@ def print_grid() -> None:
 
     for row in grid.cells:
         for cell in row:
-            print(CELL_CHARACTER[cell.cell_type] if cell.is_alive else ".", end=" ")
+            print(chr(CELL_CHARACTER[cell.cell_type]) if cell.is_alive else chr(CELL_CHARACTER["Empty"]), end=" ")
         print("\n")
 
 

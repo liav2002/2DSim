@@ -2,9 +2,10 @@ import random
 from Cells.Cell import *
 from typing import List, Optional, Tuple
 
+
 class HerbivoreCell(MovableCell):
-    def __init__(self, TTL: int, y: int, x: int, sight: int, is_alive = True, cell_type="Herbivore") -> None:
-        super().__init__(is_alive=is_alive,y=y ,x=x, sight=sight, cell_type=cell_type)
+    def __init__(self, TTL: int, y: int, x: int, sight: int, is_alive=True, cell_type="Herbivore") -> None:
+        super().__init__(is_alive=is_alive, y=y, x=x, sight=sight, cell_type=cell_type)
         self.TTL = TTL
         self.spawn_position = None
 
@@ -33,8 +34,6 @@ class HerbivoreCell(MovableCell):
 
         else:
             return
-
-
 
     def determine_next_pos(self, sub_grid: List[List[Cell]]) -> None:
         self.move = True

@@ -2,8 +2,9 @@ from typing import List
 from Cells.Cell import Cell
 
 class BasicCell(Cell):
-    def __init__(self, is_alive: bool, y: int, x: int, cell_type="Basic") -> None:
+    def __init__(self, is_alive: bool, y: int, x: int, cell_type="Basic", is_reproducible = False) -> None:
         super().__init__(is_alive=is_alive, y=y, x=x, cell_type=cell_type)
+        self.is_reproducible = is_reproducible
 
 
     def determine_next_state(self, neighbors: List[Cell]) -> None:
@@ -12,7 +13,7 @@ class BasicCell(Cell):
         if self.is_alive and (alive_neighbors < 2 or alive_neighbors > 3):
                 self.next_state = "kill"
 
-        elif not self.is_alive and alive_neighbors == 3:
+        elif self.is_reproducible and not self.is_alive and alive_neighbors == 3:
             self.next_state = "revival"
 
         else:

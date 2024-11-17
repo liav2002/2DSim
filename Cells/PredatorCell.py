@@ -7,4 +7,11 @@ class PredatorCell(MovableCell):
         self.TTL = TTL
 
     def determine_next_state(self, neighbors: List[Cell]):
-        raise Exception("Predator Cells is not implemented yet.")
+        if self.is_alive:
+            self.TTL -= 1
+            if self.TTL == 0:
+                self.next_state = "kill"
+                return
+
+    def determine_next_pos(self, sub_grid: List[List[Cell]]) -> None:
+        pass
