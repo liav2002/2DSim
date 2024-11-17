@@ -19,7 +19,7 @@ class Cell:
         elif self.next_state == "revival":
             self.revival()
 
-    def determine_next_state(self, neighbors: List[Cell]) -> None:
+    def determine_next_state(self, neighbors: list) -> None:
         raise Exception("Should have implemented this")
 
 

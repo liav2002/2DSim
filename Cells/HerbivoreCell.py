@@ -1,4 +1,4 @@
-from Cells.Cell import MovableCell
+from Cells.Cell import *
 from typing import List
 
 class HerbivoreCell(MovableCell):

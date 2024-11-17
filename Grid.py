@@ -1,5 +1,5 @@
 from typing import Tuple, List
-from Cells.Cell import MovableCell
+from Cells.Cell import *
 from Cells.CellFactory import CellFactory
 from Enums import *
 import yaml

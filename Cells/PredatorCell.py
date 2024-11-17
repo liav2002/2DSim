@@ -1,5 +1,5 @@
 from typing import List
-from Cells.Cell import MovableCell
+from Cells.Cell import *
 
 class PredatorCell(MovableCell):
     def __init__(self, TTL: int, y: int, x: int, is_alive = True) -> None:

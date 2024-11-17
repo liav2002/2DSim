@@ -2,7 +2,7 @@ import yaml
 import time
 import os
 
-from typing import Tuple
+from typing import Tuple, List
 from Cells.PlantCell import PlantCell
 from Cells.BasicCell import BasicCell
 from Grid import Grid
