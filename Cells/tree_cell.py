@@ -1,5 +1,5 @@
 from typing import List
-from Cells.Cell import Cell
+from Cells.cell import Cell
 
 class TreeCell(Cell):
     def __init__(self, y: int, x: int, is_alive = True, cell_type="Tree") -> None:

@@ -1,7 +1,7 @@
 from typing import Tuple, List
-from Cells.Cell import *
-from Cells.CellFactory import CellFactory
-from Enums import *
+from Cells.cell import *
+from Cells.cell_factory import CellFactory
+from enums import *
 import yaml
 import random
 
