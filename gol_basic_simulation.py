@@ -35,7 +35,7 @@ def next_generation(_id: int) -> None:
     global grid
     grid.update_generation()
     print_grid()
-    print(f"Generation: {_id + 1}.")
+    print(f"Generation: {_id}.")
     input("DEBUG:press any key to continue...")
 
 

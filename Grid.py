@@ -15,6 +15,8 @@ class Grid:
         self.height = height
         self.cells = []
         self.init_board(cells_map=cells_map)
+        self.can_we_produce_herbivores = True
+        self.cooldown_for_herbivores = config["HERBIVORE_COOLDOWN_STEPS"]
 
     def init_board(self, cells_map: List[List[Cell]]):
         empty_cells_position = []
@@ -64,7 +66,7 @@ class Grid:
         return sub_grid
 
     def swap_cells(self, x1: int, y1: int, x2: int, y2: int) -> None:
-        print(f"Swap between ({y1}, {x1}) to ({y2}, {x2}).")
+        print(f"DEBUG: Swap between ({y1}, {x1}) to ({y2}, {x2}).")
 
         if not (0 <= x1 < self.width and 0 <= y1 < self.height):
             raise ValueError(f"Coordinates ({y1}, {x1}) are out of bounds.")
@@ -78,17 +80,39 @@ class Grid:
         cell2.x, cell2.y = x1, y1
 
     def update_generation(self) -> None:
+        # loop for check for any updates on grid
         for row in self.cells:
             for cell in row:
                 neighbors = self.get_neighbors(cell=cell)
                 cell.determine_next_state(neighbors=neighbors)
+
                 if isinstance(cell, MovableCell):
                     cell.determine_next_pos(sub_grid=self.sub_grib_by_cell_sight(cell=cell))
                     print(f"DUBUG: cell_type = {cell.cell_type}, current_pos = ({cell.y}, {cell.x}), next_pos = ({cell.next_y}, {cell.next_x})")
 
+                if cell.cell_type == "Herbivore" and self.can_we_produce_herbivores:
+                    cell.try_reproduce(neighbors=neighbors)
+
+        # loop for doing all the updates we discovered on grid
         for row in self.cells:
             for cell in row:
                 cell.update_state()
+
+                if cell.cell_type == "Herbivore" and cell.next_state == "reproduce":
+                    if self.can_we_produce_herbivores and cell.spawn_position is not None:
+                        y ,x = cell.spawn_position
+                        self.cells[y][x] = CellFactory.create_cell(cell_type="Herbivore", position=(y, x))
+                        print(f"DEBUG: new Herbivore born at position ({y}, {x}).")
+                        cell.next_state = "none"
+                        cell.spawn_position = None
+                        self.can_we_produce_herbivores = False
+                        self.cooldown_for_herbivores = config["HERBIVORE_COOLDOWN_STEPS"]
+
+                    elif self.cooldown_for_herbivores == 0:
+                        self.can_we_produce_herbivores = True
+
+                    else:
+                        self.cooldown_for_herbivores -= 1
 
                 if isinstance(cell, MovableCell) and cell.move:
                     self.swap_cells(x1=cell.x, y1=cell.y, x2=cell.next_x, y2=cell.next_y)

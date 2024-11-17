@@ -6,12 +6,35 @@ class HerbivoreCell(MovableCell):
     def __init__(self, TTL: int, y: int, x: int, sight: int, is_alive = True, cell_type="Herbivore") -> None:
         super().__init__(is_alive=is_alive,y=y ,x=x, sight=sight, cell_type=cell_type)
         self.TTL = TTL
+        self.spawn_position = None
 
     def determine_next_state(self, neighbors: List[Cell]) -> None:
         if self.is_alive:
             self.TTL -= 1
             if self.TTL == 0:
                 self.next_state = "kill"
+                return
+
+    def try_reproduce(self, neighbors: List[Cell]) -> None:
+        if any(cell.cell_type == "Herbivore" for cell in neighbors):
+            empty_neighbors = [
+                (neighbor.y, neighbor.x)
+                for neighbor in neighbors
+                if not neighbor.is_alive
+            ]
+
+            if empty_neighbors:
+                spawn_position = random.choice(empty_neighbors)
+                self.next_state = "reproduce"
+                self.spawn_position = spawn_position  # Store where the new herbivore will spawn
+
+            else:
+                self.next_state = "none"
+
+        else:
+            return
+
+
 
     def determine_next_pos(self, sub_grid: List[List[Cell]]) -> None:
         self.move = True

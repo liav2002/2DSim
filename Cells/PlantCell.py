@@ -13,6 +13,7 @@ class PlantCell(Cell):
             if self.TTL == 0:
                 self.next_state = "kill"
             elif any(cell.cell_type == "Herbivore" for cell in neighbors):
+                print(f"DEBUG: Herbivore eat Plant at ({self.y}, {self.x})")
                 self.next_state = "kill"
             else:
                 self.next_state = "none"

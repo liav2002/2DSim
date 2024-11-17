@@ -5,23 +5,37 @@ TOTAL_GENERATIONS: 5
 DELAY_BETWEEN_GENERATIONS: 0.5
 
 NUM_OF_PLANTS: 10
-PLANTS_STEPS: 2
+PLANTS_STEPS: 20
 
-HERBIVORE_STEPS: 15
+HERBIVORE_LIFE_STEPS: 15
+HERBIVORE_COOLDOWN_STEPS: 2
 HERBIVORE_SIGHT: 10
 
-PREDATOR_STEPS: 10
+PREDATOR_LIFE_STEPS: 10
 PREDATOR_SIGHT: 10
 
 TEMPLATE_PATTERN:
  - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
  - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
  - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
- - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Herbivore", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
- - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
- - ["Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Basic", "Empty", "Empty", "Empty", "Basic", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
- - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
- - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Basic", "Empty", "Herbivore", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Herbivore", "Herbivore", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
  - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
  - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
  - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Herbivore", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+ - ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+
+BASIC_TEMPLATE_PATTERN:
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Herbivore", "Herbivore", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Basic", "Empty", "Empty", "Empty", "Basic", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Basic", "Empty", "Basic", "Empty", "Herbivore", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
+ - [ "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty" ]
