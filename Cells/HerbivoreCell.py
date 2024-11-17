@@ -15,6 +15,9 @@ class HerbivoreCell(MovableCell):
             if self.TTL == 0:
                 self.next_state = "kill"
                 return
+            elif any(cell.cell_type == "Predator" for cell in neighbors):
+                print(f"DEBUG: Predator eat Herbivore at ({self.y}, {self.x})")
+                self.next_state = "kill"
 
     def try_reproduce(self, neighbors: List[Cell]) -> None:
         if any(cell.cell_type == "Herbivore" for cell in neighbors):
@@ -59,7 +62,7 @@ class HerbivoreCell(MovableCell):
 
         valid_moves = [
             (row, col) for row, col in moves
-            if 0 <= row < len(sub_grid) and 0 <= col < len(sub_grid[0])
+            if 0 <= row < len(sub_grid) and 0 <= col < len(sub_grid[0]) and not sub_grid[row][col].is_alive
         ]
 
         return valid_moves

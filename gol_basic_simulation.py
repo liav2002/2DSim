@@ -36,14 +36,14 @@ def next_generation(_id: int) -> None:
     grid.update_generation()
     print_grid()
     print(f"Generation: {_id}.")
-    input("DEBUG:press any key to continue...")
+    # input("DEBUG:press any key to continue...")
 
 
 def print_grid() -> None:
-    # if not ON_PYCHARM:
-    #     os.system("cls")
-    # else:
-    #     print("\n" * 100)
+    if not ON_PYCHARM:
+        os.system("cls")
+    else:
+        print("\n" * 100)
 
     for row in grid.cells:
         for cell in row:
