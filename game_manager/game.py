@@ -9,7 +9,7 @@ from enums.enums import *
 with open('./config/game_config.yaml', 'r') as file:
     game_config = yaml.safe_load(file)
 
-with open('./config/patterns.yaml', 'r') as file:
+with open('./input/patterns.yaml', 'r') as file:
     patterns = yaml.safe_load(file)
 
 
