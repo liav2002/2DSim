@@ -1,4 +1,5 @@
 from typing import List
+
 from cells.cell import Cell
 from logger.file_logger import FileLogger
 

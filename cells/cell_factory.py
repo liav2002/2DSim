@@ -1,13 +1,15 @@
 from typing import Tuple
+
+import yaml
+
 from cells.cell import Cell
-from cells.basic_cell import BasicCell
-from cells.herbivore_cell import HerbivoreCell
-from cells.plant_cell import PlantCell
-from cells.predator_cell import PredatorCell
 from cells.rock_cell import RockCell
 from cells.tree_cell import TreeCell
+from cells.basic_cell import BasicCell
+from cells.plant_cell import PlantCell
 from logger.file_logger import FileLogger
-import yaml
+from cells.predator_cell import PredatorCell
+from cells.herbivore_cell import HerbivoreCell
 
 with open('config/cell_logic_config.yaml', 'r') as file:
     config = yaml.safe_load(file)

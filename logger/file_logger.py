@@ -1,6 +1,7 @@
-from logger.logger_observer import LoggerObserver
-from datetime import datetime
 import logging
+from datetime import datetime
+
+from logger.logger_observer import LoggerObserver
 
 
 class FileLogger(LoggerObserver):

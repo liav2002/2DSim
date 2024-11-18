@@ -1,7 +1,8 @@
-from logger.file_logger import FileLogger
-from typing import List, Tuple
-from cells.cell import *
 import random
+from typing import List, Tuple
+
+from cells.cell import Cell, MovableCell
+from logger.file_logger import FileLogger
 
 
 class PredatorCell(MovableCell):

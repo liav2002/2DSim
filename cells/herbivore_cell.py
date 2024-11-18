@@ -1,7 +1,8 @@
 import random
-from cells.cell import *
-from logger.file_logger import FileLogger
 from typing import List, Optional, Tuple
+
+from cells.cell import Cell, MovableCell
+from logger.file_logger import FileLogger
 
 
 class HerbivoreCell(MovableCell):

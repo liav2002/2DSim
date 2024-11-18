@@ -1,9 +1,11 @@
-from cells.cell import *
-from cells.cell_factory import CellFactory
+import random
+
+import yaml
+
+from cells.cell import Cell, MovableCell
 from logger.observable import Observable
 from logger.file_logger import FileLogger
-import yaml
-import random
+from cells.cell_factory import CellFactory
 
 with open('./config/game_config.yaml', 'r') as file:
     game_config = yaml.safe_load(file)

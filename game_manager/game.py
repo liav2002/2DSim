@@ -1,10 +1,11 @@
-import yaml
-import time
 import os
+import time
 
+import yaml
+
+from enums.enums import CELL_TYPE, CELL_CHARACTER
 from logger.file_logger import FileLogger
 from game_manager.grid import Grid
-from enums.enums import *
 
 with open('./config/game_config.yaml', 'r') as file:
     game_config = yaml.safe_load(file)

@@ -1,6 +1,7 @@
+from typing import List
+
 from logger.observable import Observable
 from logger.file_logger import FileLogger
-from typing import List
 
 
 class Cell(Observable):
