@@ -16,7 +16,6 @@ class PredatorCell(MovableCell):
             self.TTL -= 1
             if self.TTL == 0:
                 self.next_state = "kill"
-                return
 
     def determine_next_pos(self, sub_grid: List[List[Cell]]) -> None:
         self.move = True
