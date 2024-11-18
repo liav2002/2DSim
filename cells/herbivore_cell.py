@@ -1,5 +1,5 @@
 import random
-from Cells.cell import *
+from cells.cell import *
 from typing import List, Optional, Tuple
 
 

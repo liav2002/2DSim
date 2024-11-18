@@ -1,5 +1,5 @@
 from typing import List
-from Cells.cell import Cell
+from cells.cell import Cell
 
 
 class PlantCell(Cell):

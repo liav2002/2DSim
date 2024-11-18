@@ -1,5 +1,5 @@
 from typing import List
-from Cells.cell import Cell
+from cells.cell import Cell
 
 class BasicCell(Cell):
     def __init__(self, is_alive: bool, y: int, x: int, cell_type="Basic", is_reproducible = False) -> None:

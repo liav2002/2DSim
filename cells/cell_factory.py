@@ -1,11 +1,11 @@
 from typing import Tuple
-from Cells.cell import Cell
-from Cells.basic_cell import BasicCell
-from Cells.herbivore_cell import HerbivoreCell
-from Cells.plant_cell import PlantCell
-from Cells.predator_cell import PredatorCell
-from Cells.rock_cell import RockCell
-from Cells.tree_cell import TreeCell
+from cells.cell import Cell
+from cells.basic_cell import BasicCell
+from cells.herbivore_cell import HerbivoreCell
+from cells.plant_cell import PlantCell
+from cells.predator_cell import PredatorCell
+from cells.rock_cell import RockCell
+from cells.tree_cell import TreeCell
 import yaml
 
 with open('config/plant_config.yaml', 'r') as file:

@@ -1,5 +1,5 @@
 from typing import List
-from Cells.cell import Cell
+from cells.cell import Cell
 
 
 class RockCell(Cell):
@@ -7,4 +7,4 @@ class RockCell(Cell):
         super().__init__(is_alive=is_alive, y=y, x=x, cell_type=cell_type)
 
     def determine_next_state(self, neighbors: List[Cell]):
-        raise Exception("Rock Cells is not implemented yet.")
+        raise Exception("Rock cells is not implemented yet.")

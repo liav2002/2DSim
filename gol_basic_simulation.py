@@ -1,4 +1,4 @@
-from game import Game
+from game_manager.game import Game
 
 def main():
     game = Game()

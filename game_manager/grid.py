@@ -1,17 +1,15 @@
-from typing import Tuple, List
-from Cells.cell import *
-from Cells.cell_factory import CellFactory
-from enums import *
+from cells.cell import *
+from cells.cell_factory import CellFactory
 import yaml
 import random
 
-with open('config/game_config.yaml', 'r') as file:
+with open('./config/game_config.yaml', 'r') as file:
     game_config = yaml.safe_load(file)
 
-with open('config/herbivore_config.yaml', 'r') as file:
+with open('./config/herbivore_config.yaml', 'r') as file:
     herbivore_config = yaml.safe_load(file)
 
-with open('config/plant_config.yaml', 'r') as file:
+with open('./config/plant_config.yaml', 'r') as file:
     plant_config = yaml.safe_load(file)
 
 
