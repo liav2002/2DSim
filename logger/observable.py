@@ -10,6 +10,6 @@ class Observable:
         self.observers.remove(observer)
 
     def notify_observers(self, event):
-        for observer in self._observers:
+        for observer in self.observers:
             observer.update(event)
 
