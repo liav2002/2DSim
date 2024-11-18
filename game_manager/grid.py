@@ -124,5 +124,5 @@ class Grid(Observable):
 
                 if isinstance(cell, MovableCell) and cell.move:
                     self.swap_cells(x1=cell.x, y1=cell.y, x2=cell.next_x, y2=cell.next_y)
-                    cell.reset_next_pos()
                     self.notify_observers(f"Cell {cell.cell_type} moved to ({cell.next_y}, {cell.next_x}).")
+                    cell.reset_next_pos()
