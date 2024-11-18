@@ -1,7 +1,9 @@
+from logger.observable import Observable
 from typing import List
 
-class Cell:
+class Cell(Observable):
     def __init__(self, y: int, x: int, cell_type: str, is_alive=True) -> None:
+        super().__init__()
         self.is_alive = is_alive
         self.next_state = None
         self.cell_type = cell_type
@@ -10,9 +12,11 @@ class Cell:
 
     def kill(self) -> None:
         self.is_alive = False
+        self.notify_observers(f"Cell {self.cell_type} at ({self.y}, {self.x}) died.")
 
     def revival(self) -> None:
         self.is_alive = True
+        self.notify_observers(f"Cell {self.cell_type} at ({self.y}, {self.x}) revived.")
 
     def update_state(self) -> None:
         if self.next_state == "kill":
