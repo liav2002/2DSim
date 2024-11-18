@@ -1,4 +1,3 @@
-
 class Observable:
     def __init__(self):
         self.observers = []
@@ -12,4 +11,3 @@ class Observable:
     def notify_observers(self, event):
         for observer in self.observers:
             observer.update(event)
-
