@@ -6,6 +6,7 @@ from cells.plant_cell import PlantCell
 from cells.predator_cell import PredatorCell
 from cells.rock_cell import RockCell
 from cells.tree_cell import TreeCell
+from logger.file_logger import FileLogger
 import yaml
 
 with open('config/plant_config.yaml', 'r') as file:
@@ -18,24 +19,30 @@ with open('config/predator_config.yaml', 'r') as file:
     predator_config = yaml.safe_load(file)
 
 
-
-
 class CellFactory:
     @staticmethod
-    def create_cell(cell_type: str, position: Tuple[int, int], cell_state = True) -> Cell:
+    def create_cell(cell_type: str, position: Tuple[int, int], file_logger_observer: FileLogger,
+                    cell_state=True) -> Cell:
         if cell_type == "Basic":
-            return BasicCell(is_alive=True, y=position[0], x=position[1], is_reproducible=False)
+            return BasicCell(is_alive=True, y=position[0], x=position[1], is_reproducible=False,
+                             file_logger_observer=file_logger_observer)
         elif cell_type == "Empty":
-            return BasicCell(is_alive=False, y=position[0], x=position[1], is_reproducible=False)
+            return BasicCell(is_alive=False, y=position[0], x=position[1], is_reproducible=False,
+                             file_logger_observer=file_logger_observer)
         elif cell_type == "Plant":
-            return PlantCell(TTL=plant_config["PLANTS_STEPS"], is_alive=cell_state, y=position[0], x=position[1])
+            return PlantCell(TTL=plant_config["PLANTS_STEPS"], is_alive=cell_state, y=position[0], x=position[1],
+                             file_logger_observer=file_logger_observer)
         elif cell_type == "Herbivore":
-            return HerbivoreCell(TTL=herbivore_config["HERBIVORE_LIFE_STEPS"], is_alive=cell_state, y=position[0], x=position[1], sight=herbivore_config["HERBIVORE_SIGHT"])
+            return HerbivoreCell(TTL=herbivore_config["HERBIVORE_LIFE_STEPS"], is_alive=cell_state, y=position[0],
+                                 x=position[1], sight=herbivore_config["HERBIVORE_SIGHT"],
+                                 file_logger_observer=file_logger_observer)
         elif cell_type == "Predator":
-            return PredatorCell(TTL=predator_config["PREDATOR_LIFE_STEPS"], is_alive=cell_state, y=position[0], x=position[1], sight=predator_config["PREDATOR_SIGHT"])
+            return PredatorCell(TTL=predator_config["PREDATOR_LIFE_STEPS"], is_alive=cell_state, y=position[0],
+                                x=position[1], sight=predator_config["PREDATOR_SIGHT"],
+                                file_logger_observer=file_logger_observer)
         elif cell_type == "Rock":
-            return RockCell(y=position[0], x=position[1])
+            return RockCell(y=position[0], x=position[1], file_logger_observer=file_logger_observer)
         elif cell_type == "Tree":
-            return TreeCell(y=position[0], x=position[1])
+            return TreeCell(y=position[0], x=position[1], file_logger_observer=file_logger_observer)
         else:
             raise ValueError(f"Unknown cell type: {cell_type}")

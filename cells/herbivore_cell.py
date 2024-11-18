@@ -1,11 +1,14 @@
 import random
 from cells.cell import *
+from logger.file_logger import FileLogger
 from typing import List, Optional, Tuple
 
 
 class HerbivoreCell(MovableCell):
-    def __init__(self, TTL: int, y: int, x: int, sight: int, is_alive=True, cell_type="Herbivore") -> None:
-        super().__init__(is_alive=is_alive, y=y, x=x, sight=sight, cell_type=cell_type)
+    def __init__(self, TTL: int, y: int, x: int, sight: int, file_logger_observer: FileLogger, is_alive=True,
+                 cell_type="Herbivore") -> None:
+        super().__init__(is_alive=is_alive, y=y, x=x, sight=sight, cell_type=cell_type,
+                         file_logger_observer=file_logger_observer)
         self.TTL = TTL
         self.spawn_position = None
 
@@ -15,8 +18,8 @@ class HerbivoreCell(MovableCell):
             if self.TTL == 0:
                 self.next_state = "kill"
                 return
-            elif any(cell.cell_type == "Predator" and cell.is_alive  for cell in neighbors):
-                print(f"DEBUG: Predator eat Herbivore at ({self.y}, {self.x})")
+            elif any(cell.cell_type == "Predator" and cell.is_alive for cell in neighbors):
+                self.notify_observers(f"Herbivore at ({self.y}, {self.x}) was eaten by Predator.")
                 self.next_state = "kill"
 
     def try_reproduce(self, neighbors: List[Cell]) -> None:

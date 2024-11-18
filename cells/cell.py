@@ -1,9 +1,11 @@
 from logger.observable import Observable
+from logger.file_logger import FileLogger
 from typing import List
 
 class Cell(Observable):
-    def __init__(self, y: int, x: int, cell_type: str, is_alive=True) -> None:
+    def __init__(self, y: int, x: int, cell_type: str, file_logger_observer: FileLogger, is_alive=True) -> None:
         super().__init__()
+        self.add_observer(file_logger_observer)
         self.is_alive = is_alive
         self.next_state = None
         self.cell_type = cell_type
@@ -29,8 +31,8 @@ class Cell(Observable):
 
 
 class MovableCell(Cell):
-    def __init__(self, y: int, x: int, sight: int, cell_type: str, is_alive=True) -> None:
-        super().__init__(is_alive=is_alive, y=y, x=x, cell_type=cell_type)
+    def __init__(self, y: int, x: int, sight: int, cell_type: str, file_logger_observer: FileLogger, is_alive=True) -> None:
+        super().__init__(is_alive=is_alive, y=y, x=x, cell_type=cell_type, file_logger_observer=file_logger_observer)
         self.sight = sight
         self.next_x = -1
         self.next_y = -1
