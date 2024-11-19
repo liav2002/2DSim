@@ -93,6 +93,8 @@ class Grid(Observable):
         cell2.x, cell2.y = x1, y1
 
     def update_generation(self) -> None:
+        self.notify_observers((EVENT["NEW_GENERATION"], "Starting new generation."))
+
         # loop for check for any updates on grid
         for row in self.cells:
             for cell in row:

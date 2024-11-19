@@ -11,6 +11,7 @@ from observers.data_collector_observer import DataCollectorObserver
 class DataCollector(DataCollectorObserver):
     def __init__(self, data_dir: str):
         timestamp = datetime.now().strftime("%d-%m-%y_%H-%M-%S")
+        self.new_generation = False
         self.data_dir = f"{data_dir}/{timestamp}/"
         self.init_data_dir()
         self.init_generations_status_file()
@@ -39,18 +40,22 @@ class DataCollector(DataCollectorObserver):
     def update_generations_status_file(self, event: str, file_path: str):
         with open(file_path, mode='r', newline='', encoding='utf-8') as csv_file:
             reader = list(csv.reader(csv_file))
+            header = reader[0]
             last_row = reader[-1]
 
-        new_row = last_row[:]
+        if header == last_row:
+            new_row = [0] * 6
+        else:
+            new_row = last_row[:]
+            if self.new_generation:
+                new_row[2] = str(int(new_row[2]) + 1)  # update generation_id
+                self.new_generation = False
 
         # update date and time
         current_date = datetime.now().strftime('%Y-%m-%d')
         current_time = datetime.now().strftime('%H:%M:%S')
         new_row[0] = current_date
         new_row[1] = current_time
-
-        # update generation_id
-        new_row[2] = str(int(new_row[1]) + 1)
 
         # update other fields
         if event == EVENT['PLANT_DIED']:
@@ -65,25 +70,29 @@ class DataCollector(DataCollectorObserver):
         elif event == EVENT['HERBIVORE_REPRODUCE']:
             new_row[4] = str(int(new_row[4]) + 1)  # Increase num_of_herbivores
 
-        with open(self.file_path, mode='a', newline='', encoding='utf-8') as csv_file:
+        with open(file_path, mode='a', newline='', encoding='utf-8') as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow(new_row)
 
     def update_events_file(self, event: str, file_path: str):
         with open(file_path, mode='r', newline='', encoding='utf-8') as csv_file:
             reader = list(csv.reader(csv_file))
+            header = reader[0]
             last_row = reader[-1]
 
-        new_row = last_row[:]
+        if header == last_row:
+            new_row = [0] * 7
+        else:
+            new_row = last_row[:]
+            if self.new_generation:
+                new_row[2] = str(int(new_row[2]) + 1)  # update generation_id
+                self.new_generation = False
 
         # update date and time
         current_date = datetime.now().strftime('%Y-%m-%d')
         current_time = datetime.now().strftime('%H:%M:%S')
         new_row[0] = current_date
         new_row[1] = current_time
-
-        # update generation_id
-        new_row[2] = str(int(new_row[1]) + 1)
 
         # update other fields
         if event == EVENT['PLANT_DIED']:
@@ -98,13 +107,17 @@ class DataCollector(DataCollectorObserver):
         elif event == EVENT['HERBIVORE_REPRODUCE']:
             new_row[4] = str(int(new_row[6]) + 1)  # Increase num_of_herbivores_reproduce
 
-        with open(self.file_path, mode='a', newline='', encoding='utf-8') as csv_file:
+        with open(file_path, mode='a', newline='', encoding='utf-8') as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow(new_row)
 
     def update(self, event: Tuple[int, int]):
-        events_file_path = f'{self.data_dir}/{EVENTS_DATA_FILE}'
-        status_file_path = f'{self.data_dir}/{GENERATION_STATUS_DATA_FILE}'
+        if event[0] == EVENT["NEW_GENERATION"]:
+            self.new_generation = True
 
-        self.update_generations_status_file(event=event[0], file_path=status_file_path)
-        self.update_events_file(event=event[0], file_path=events_file_path)
+        else:
+            events_file_path = f'{self.data_dir}/{EVENTS_DATA_FILE}'
+            status_file_path = f'{self.data_dir}/{GENERATION_STATUS_DATA_FILE}'
+
+            self.update_generations_status_file(event=event[0], file_path=status_file_path)
+            self.update_events_file(event=event[0], file_path=events_file_path)
