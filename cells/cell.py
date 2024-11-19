@@ -20,6 +20,7 @@ class Cell(Observable):
 
     def kill(self) -> None:
         self.is_alive = False
+        self.next_state = None
 
         if self.cell_type == CELL_TYPE["Plant"]:
             event = EVENT["PLANT_DIED"]
@@ -37,6 +38,7 @@ class Cell(Observable):
 
     def revival(self) -> None:
         self.is_alive = True
+        self.next_state = None
         self.notify_observers((EVENT["CELL_REVIVAL"], f"Cell {self.cell_type} at ({self.y}, {self.x}) revived."))
 
     def update_state(self) -> None:

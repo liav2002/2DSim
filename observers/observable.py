@@ -1,5 +1,3 @@
-from typing import Tuple
-
 class Observable:
     def __init__(self):
         self.observers = []
@@ -10,6 +8,6 @@ class Observable:
     def remove_observer(self, observer):
         self.observers.remove(observer)
 
-    def notify_observers(self, event: Tuple[int, int]):
+    def notify_observers(self, event: tuple):
         for observer in self.observers:
             observer.update(event)

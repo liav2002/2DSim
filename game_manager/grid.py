@@ -31,7 +31,7 @@ class Grid(Observable):
         self.can_we_produce_herbivores = True
         self.cooldown_for_herbivores = cell_config["HERBIVORE"]["COOLDOWN_REPRODUCE_STEPS"]
 
-    def init_board(self, cells_map: List[List[Cell]]):
+    def init_board(self, cells_map: List[List[str]]):
         empty_cells_position = []
         num_of_plants = cell_config["PLANT"]["AMOUNT"]
 
@@ -51,6 +51,12 @@ class Grid(Observable):
             self.cells[y][x] = CellFactory.create_cell(cell_type="Plant", position=(y, x),
                                                        file_logger_observer=self.observers[0],
                                                        data_collector_observer=self.observers[1])
+
+        num_of = {CELL_TYPE['Plant']: num_of_plants,
+                  CELL_TYPE["Herbivore"]: sum(row.count("Herbivore") for row in cells_map),
+                  CELL_TYPE["Predator"]: sum(row.count("Predator") for row in cells_map)}
+
+        self.notify_observers((EVENT["INIT_BOARD"], num_of))
 
     def get_neighbors(self, cell: Cell) -> List[Cell]:
         neighbors = []
@@ -122,7 +128,7 @@ class Grid(Observable):
                                                                    data_collector_observer=self.observers[1])
                         self.notify_observers((EVENT['HERBIVORE_REPRODUCE'],
                                                f"New Herbivore born at {cell.spawn_position}."))
-                        cell.next_state = "none"
+                        cell.next_state = None
                         cell.spawn_position = None
                         self.can_we_produce_herbivores = False
                         self.cooldown_for_herbivores = cell_config["HERBIVORE"]["COOLDOWN_REPRODUCE_STEPS"]

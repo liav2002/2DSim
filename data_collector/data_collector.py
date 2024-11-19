@@ -1,9 +1,8 @@
 import os
 import csv
-from typing import Tuple
 from datetime import datetime
 
-from enums.enums import EVENT
+from enums.enums import EVENT, CELL_TYPE
 from consts.data_files import GENERATION_STATUS_DATA_FILE, EVENTS_DATA_FILE
 from observers.data_collector_observer import DataCollectorObserver
 
@@ -38,7 +37,7 @@ class DataCollector(DataCollectorObserver):
                                  'num_of_predators_died', 'num_of_herbivores_reproduce',
                                  'num_of_plants_eaten_by_herbivores', 'num_of_herbivores_eaten_by_predators'])
 
-    def update_generations_status_file(self, event: str, file_path: str):
+    def update_generations_status_file(self, event: str, file_path: str, num_of=None):
         with open(file_path, mode='r', newline='', encoding='utf-8') as csv_file:
             reader = list(csv.reader(csv_file))
             header = reader[0]
@@ -58,7 +57,14 @@ class DataCollector(DataCollectorObserver):
         new_row[1] = current_time
 
         # update other fields
-        if event == EVENT['PLANT_DIED']:
+        if event == EVENT['INIT_BOARD']:
+            if num_of is None:
+                raise Exception("You init board without send count of cell types to data collector.")
+            new_row[3] = str(int(num_of[CELL_TYPE['Plant']]))
+            new_row[4] = str(int(num_of[CELL_TYPE['Herbivore']]))
+            new_row[5] = str(int(num_of[CELL_TYPE['Predator']]))
+
+        elif event == EVENT['PLANT_DIED']:
             new_row[3] = str(int(new_row[3]) - 1)  # Decrease num_of_plants
 
         elif event == EVENT['HERBIVORE_DIED']:
@@ -116,9 +122,13 @@ class DataCollector(DataCollectorObserver):
             writer = csv.writer(csv_file)
             writer.writerow(new_row)
 
-    def update(self, event: Tuple[int, int]):
+    def update(self, event: tuple):
         if event[0] == EVENT["NEW_GENERATION"]:
             self.new_generation = True
+
+        elif event[0] == EVENT["INIT_BOARD"]:
+            self.update_generations_status_file(event=event[0], num_of=event[1],
+                                                file_path=f'{self.data_dir}/{GENERATION_STATUS_DATA_FILE}')
 
         else:
             events_file_path = f'{self.data_dir}/{EVENTS_DATA_FILE}'
