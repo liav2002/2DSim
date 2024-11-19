@@ -1,4 +1,5 @@
 import logging
+from typing import Tuple
 from datetime import datetime
 
 from observers.logger_observer import LoggerObserver
@@ -11,5 +12,5 @@ class FileLogger(LoggerObserver):
         logging.basicConfig(filename=log_file_path, level=logging.INFO)
         self.logger = logging.getLogger()
 
-    def update(self, event: str):
-        self.logger.info(event)
+    def update(self, event: Tuple[int, int]):
+        self.logger.info(event[1])

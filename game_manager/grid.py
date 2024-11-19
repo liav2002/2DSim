@@ -3,9 +3,11 @@ import random
 
 import yaml
 
+from enums.enums import EVENT
 from cells.cell import Cell, MovableCell
 from observers.observable import Observable
 from looger.file_logger import FileLogger
+from data_collector.data_collector import DataCollector
 from cells.cell_factory import CellFactory
 
 with open('./config/game_config.yaml', 'r') as file:
@@ -16,9 +18,12 @@ with open('config/cell_logic_config.yaml', 'r') as file:
 
 
 class Grid(Observable):
-    def __init__(self, width: int, height: int, cells_map: List[List[Cell]], file_logger_observer: FileLogger) -> None:
+    def __init__(self, width: int, height: int, cells_map: List[List[Cell]], file_logger_observer: FileLogger,
+                 data_collector_observer: DataCollector) -> None:
         super().__init__()
         self.add_observer(file_logger_observer)
+        self.add_observer(data_collector_observer)
+
         self.width = width
         self.height = height
         self.cells = []
@@ -110,7 +115,8 @@ class Grid(Observable):
                         y, x = cell.spawn_position
                         self.cells[y][x] = CellFactory.create_cell(cell_type="Herbivore", position=(y, x),
                                                                    file_logger_observer=self.observers[0])
-                        self.notify_observers(f"New Herbivore born at {cell.spawn_position}.")
+                        self.notify_observers((EVENT['HERBIVORE_REPRODUCE'],
+                                               f"New Herbivore born at {cell.spawn_position}."))
                         cell.next_state = "none"
                         cell.spawn_position = None
                         self.can_we_produce_herbivores = False
@@ -124,5 +130,6 @@ class Grid(Observable):
 
                 if isinstance(cell, MovableCell) and cell.move:
                     self.swap_cells(x1=cell.x, y1=cell.y, x2=cell.next_x, y2=cell.next_y)
-                    self.notify_observers(f"Cell {cell.cell_type} moved to ({cell.next_y}, {cell.next_x}).")
+                    self.notify_observers((EVENT['MOVE'],
+                                           f"Cell {cell.cell_type} moved to ({cell.next_y}, {cell.next_x})."))
                     cell.reset_next_pos()

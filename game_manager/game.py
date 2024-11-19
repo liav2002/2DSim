@@ -4,6 +4,7 @@ import yaml
 
 from enums.enums import CELL_CHARACTER
 from looger.file_logger import FileLogger
+from data_collector.data_collector import DataCollector
 from game_manager.grid import Grid
 
 with open('./config/game_config.yaml', 'r') as file:
@@ -22,7 +23,7 @@ class Game:
         self.pattern = patterns['TEMPLATE_PATTERN']
 
         self.grid = Grid(width=self.width, height=self.height, cells_map=self.pattern,
-                         file_logger_observer=FileLogger('./logs'))
+                         file_logger_observer=FileLogger('./logs'), data_collector_observer=DataCollector("./data"))
 
         self.print_grid()
         print("Generation: 0.")

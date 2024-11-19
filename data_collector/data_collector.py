@@ -1,8 +1,7 @@
 import os
 import csv
+from typing import Tuple
 from datetime import datetime
-
-from Tools.scripts.generate_token import update_file
 
 from enums.enums import EVENT
 from consts.data_files import GENERATION_STATUS_DATA_FILE, EVENTS_DATA_FILE
@@ -103,9 +102,9 @@ class DataCollector(DataCollectorObserver):
             writer = csv.writer(csv_file)
             writer.writerow(new_row)
 
-    def update(self, event: str):
+    def update(self, event: Tuple[int, int]):
         events_file_path = f'{self.data_dir}/{EVENTS_DATA_FILE}'
         status_file_path = f'{self.data_dir}/{GENERATION_STATUS_DATA_FILE}'
 
-        self.update_generations_status_file(event=event, file_path=status_file_path)
-        self.update_events_file(event=event, file_path=events_file_path)
+        self.update_generations_status_file(event=event[0], file_path=status_file_path)
+        self.update_events_file(event=event[0], file_path=events_file_path)
