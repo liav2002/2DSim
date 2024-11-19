@@ -49,7 +49,6 @@ class DataCollector(DataCollectorObserver):
             new_row = last_row[:]
             if self.new_generation:
                 new_row[2] = str(int(new_row[2]) + 1)  # update generation_id
-                self.new_generation = False
 
         # update date and time
         current_date = datetime.now().strftime('%Y-%m-%d')
@@ -86,7 +85,6 @@ class DataCollector(DataCollectorObserver):
             new_row = last_row[:]
             if self.new_generation:
                 new_row[2] = str(int(new_row[2]) + 1)  # update generation_id
-                self.new_generation = False
 
         # update date and time
         current_date = datetime.now().strftime('%Y-%m-%d')
@@ -121,3 +119,4 @@ class DataCollector(DataCollectorObserver):
 
             self.update_generations_status_file(event=event[0], file_path=status_file_path)
             self.update_events_file(event=event[0], file_path=events_file_path)
+            self.new_generation = False
