@@ -1,10 +1,9 @@
-import os
 import time
 
 import yaml
 
-from enums.enums import CELL_TYPE, CELL_CHARACTER
-from logger.file_logger import FileLogger
+from enums.enums import CELL_CHARACTER
+from looger.file_logger import FileLogger
 from game_manager.grid import Grid
 
 with open('./config/game_config.yaml', 'r') as file:

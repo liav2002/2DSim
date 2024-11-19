@@ -1,7 +1,7 @@
 from typing import List
 
-from logger.observable import Observable
-from logger.file_logger import FileLogger
+from observers.observable import Observable
+from looger.file_logger import FileLogger
 
 
 class Cell(Observable):

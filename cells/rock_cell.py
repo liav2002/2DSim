@@ -1,7 +1,7 @@
 from typing import List
 
 from cells.cell import Cell
-from logger.file_logger import FileLogger
+from looger.file_logger import FileLogger
 
 
 class RockCell(Cell):

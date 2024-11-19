@@ -4,8 +4,8 @@ import random
 import yaml
 
 from cells.cell import Cell, MovableCell
-from logger.observable import Observable
-from logger.file_logger import FileLogger
+from observers.observable import Observable
+from looger.file_logger import FileLogger
 from cells.cell_factory import CellFactory
 
 with open('./config/game_config.yaml', 'r') as file:

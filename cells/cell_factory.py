@@ -7,7 +7,7 @@ from cells.rock_cell import RockCell
 from cells.tree_cell import TreeCell
 from cells.basic_cell import BasicCell
 from cells.plant_cell import PlantCell
-from logger.file_logger import FileLogger
+from looger.file_logger import FileLogger
 from cells.predator_cell import PredatorCell
 from cells.herbivore_cell import HerbivoreCell
 
