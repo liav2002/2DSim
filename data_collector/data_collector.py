@@ -35,7 +35,8 @@ class DataCollector(DataCollectorObserver):
             with open(file_path, mode='w', newline='', encoding='utf-8') as csv_file:
                 writer = csv.writer(csv_file)
                 writer.writerow(['date', 'time', 'generation_id', 'num_of_plants_died', 'num_of_herbivores_died',
-                                 'num_of_predators_died', 'num_of_herbivores_reproduce'])
+                                 'num_of_predators_died', 'num_of_herbivores_reproduce',
+                                 'num_of_plants_eaten_by_herbivores', 'num_of_herbivores_eaten_by_predators'])
 
     def update_generations_status_file(self, event: str, file_path: str):
         with open(file_path, mode='r', newline='', encoding='utf-8') as csv_file:
@@ -80,7 +81,7 @@ class DataCollector(DataCollectorObserver):
             last_row = reader[-1]
 
         if header == last_row:
-            new_row = [0] * 7
+            new_row = [0] * 9
         else:
             new_row = last_row[:]
             if self.new_generation:
@@ -103,7 +104,13 @@ class DataCollector(DataCollectorObserver):
             new_row[5] = str(int(new_row[5]) + 1)  # Increase num_of_predators_died
 
         elif event == EVENT['HERBIVORE_REPRODUCE']:
-            new_row[4] = str(int(new_row[6]) + 1)  # Increase num_of_herbivores_reproduce
+            new_row[6] = str(int(new_row[6]) + 1)  # Increase num_of_herbivores_reproduce
+
+        elif event == EVENT['PLANT_WAS_EATEN']:
+            new_row[7] = str(int(new_row[7]) + 1)  # Increase num_of_plants_eaten_by_herbivores
+
+        elif event == EVENT['HERBIVORE_WAS_EATEN']:
+            new_row[8] = str(int(new_row[8]) + 1)  # Increase num_of_herbivores_eaten_by_predators
 
         with open(file_path, mode='a', newline='', encoding='utf-8') as csv_file:
             writer = csv.writer(csv_file)

@@ -2,14 +2,17 @@ import random
 from typing import List, Tuple
 
 from cells.cell import Cell, MovableCell
+from enums.enums import CELL_TYPE, EVENT
 from looger.file_logger import FileLogger
+from data_collector.data_collector import DataCollector
 
 
 class HerbivoreCell(MovableCell):
-    def __init__(self, TTL: int, y: int, x: int, sight: int, file_logger_observer: FileLogger, is_alive=True,
-                 cell_type="Herbivore") -> None:
+    def __init__(self, TTL: int, y: int, x: int, sight: int, file_logger_observer: FileLogger,
+                 data_collector_observer: DataCollector, is_alive=True, cell_type=CELL_TYPE["Herbivore"]) -> None:
         super().__init__(is_alive=is_alive, y=y, x=x, sight=sight, cell_type=cell_type,
-                         file_logger_observer=file_logger_observer)
+                         file_logger_observer=file_logger_observer,
+                         data_collector_observer=data_collector_observer)
         self.TTL = TTL
         self.spawn_position = None
 
@@ -19,12 +22,12 @@ class HerbivoreCell(MovableCell):
             if self.TTL == 0:
                 self.next_state = "kill"
                 return
-            elif any(cell.cell_type == "Predator" and cell.is_alive for cell in neighbors):
-                self.notify_observers(f"Herbivore at ({self.y}, {self.x}) was eaten by Predator.")
+            elif any(cell.cell_type == CELL_TYPE["Predator"] and cell.is_alive for cell in neighbors):
+                self.notify_observers((EVENT['HERBIVORE_WAS_EATEN'], f"Herbivore at ({self.y}, {self.x}) was eaten by Predator."))
                 self.next_state = "kill"
 
     def try_reproduce(self, neighbors: List[Cell]) -> None:
-        if any(cell.cell_type == "Herbivore" and cell.is_alive for cell in neighbors):
+        if any(cell.cell_type == CELL_TYPE["Herbivore"] and cell.is_alive for cell in neighbors):
             empty_neighbors = [
                 (neighbor.y, neighbor.x)
                 for neighbor in neighbors
@@ -79,7 +82,7 @@ class HerbivoreCell(MovableCell):
         for move_y, move_x in valid_moves:
             for row_idx, row in enumerate(sub_grid):
                 for col_idx, cell in enumerate(row):
-                    if cell.cell_type == "Plant" and cell.is_alive:
+                    if cell.cell_type == CELL_TYPE["Plant"] and cell.is_alive:
                         # Calculate Manhattan distance to the plant
                         distance = abs(row_idx - move_y) + abs(col_idx - move_x)
                         if distance < closest_distance:

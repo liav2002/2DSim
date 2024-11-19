@@ -2,8 +2,8 @@ import time
 
 import yaml
 
-from enums.enums import CELL_CHARACTER
 from looger.file_logger import FileLogger
+from enums.enums import CELL_CHARACTER, CELL_TYPE
 from data_collector.data_collector import DataCollector
 from game_manager.grid import Grid
 
@@ -40,7 +40,7 @@ class Game:
         for row in self.grid.cells:
             print(" " * 50, end="")
             for cell in row:
-                print(chr(CELL_CHARACTER[cell.cell_type]) if cell.is_alive else chr(CELL_CHARACTER["Empty"]), end=" ")
+                print(chr(CELL_CHARACTER[cell.cell_type]) if cell.is_alive else chr(CELL_CHARACTER[CELL_TYPE["Empty"]]), end=" ")
             print("\n")
         print(" " * 50 + "=" * 60)
 

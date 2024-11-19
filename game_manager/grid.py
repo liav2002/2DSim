@@ -3,8 +3,8 @@ import random
 
 import yaml
 
-from enums.enums import EVENT
 from cells.cell import Cell, MovableCell
+from enums.enums import EVENT, CELL_TYPE
 from observers.observable import Observable
 from looger.file_logger import FileLogger
 from data_collector.data_collector import DataCollector
@@ -39,7 +39,8 @@ class Grid(Observable):
             cell_row = []
             for x, cell_type in enumerate(row):
                 cell = CellFactory.create_cell(cell_type=cell_type, position=(y, x),
-                                               file_logger_observer=self.observers[0])
+                                               file_logger_observer=self.observers[0],
+                                               data_collector_observer=self.observers[1])
                 cell_row.append(cell)
                 if not cell.is_alive: empty_cells_position.append((y, x))
             self.cells.append(cell_row)
@@ -48,7 +49,8 @@ class Grid(Observable):
             chosen_empty_cell = random.choice(empty_cells_position)
             y, x = chosen_empty_cell
             self.cells[y][x] = CellFactory.create_cell(cell_type="Plant", position=(y, x),
-                                                       file_logger_observer=self.observers[0])
+                                                       file_logger_observer=self.observers[0],
+                                                       data_collector_observer=self.observers[1])
 
     def get_neighbors(self, cell: Cell) -> List[Cell]:
         neighbors = []
@@ -104,7 +106,7 @@ class Grid(Observable):
                 if isinstance(cell, MovableCell):
                     cell.determine_next_pos(sub_grid=self.sub_grib_by_cell_sight(cell=cell))
 
-                if cell.cell_type == "Herbivore" and self.can_we_produce_herbivores:
+                if cell.cell_type == CELL_TYPE["Herbivore"] and self.can_we_produce_herbivores:
                     cell.try_reproduce(neighbors=neighbors)
 
         # loop for doing all the updates we discovered on grid
@@ -112,11 +114,12 @@ class Grid(Observable):
             for cell in row:
                 cell.update_state()
 
-                if cell.cell_type == "Herbivore" and cell.next_state == "reproduce":
+                if cell.cell_type == CELL_TYPE["Herbivore"] and cell.next_state == "reproduce":
                     if self.can_we_produce_herbivores and cell.spawn_position is not None:
                         y, x = cell.spawn_position
                         self.cells[y][x] = CellFactory.create_cell(cell_type="Herbivore", position=(y, x),
-                                                                   file_logger_observer=self.observers[0])
+                                                                   file_logger_observer=self.observers[0],
+                                                                   data_collector_observer=self.observers[1])
                         self.notify_observers((EVENT['HERBIVORE_REPRODUCE'],
                                                f"New Herbivore born at {cell.spawn_position}."))
                         cell.next_state = "none"

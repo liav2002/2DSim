@@ -1,15 +1,18 @@
 import random
+from enum import EnumMeta
 from typing import List, Tuple
 
+from enums.enums import CELL_TYPE
 from cells.cell import Cell, MovableCell
 from looger.file_logger import FileLogger
-
+from data_collector.data_collector import DataCollector
 
 class PredatorCell(MovableCell):
-    def __init__(self, TTL: int, y: int, x: int, sight: int, file_logger_observer: FileLogger, is_alive=True,
-                 cell_type="Predator") -> None:
+    def __init__(self, TTL: int, y: int, x: int, sight: int, file_logger_observer: FileLogger,
+                 data_collector_observer: DataCollector ,is_alive=True, cell_type=CELL_TYPE["Predator"]) -> None:
         super().__init__(is_alive=is_alive, y=y, x=x, sight=sight, cell_type=cell_type,
-                         file_logger_observer=file_logger_observer)
+                         file_logger_observer=file_logger_observer,
+                         data_collector_observer=data_collector_observer)
         self.TTL = TTL
 
     def determine_next_state(self, neighbors: List[Cell]):
@@ -43,7 +46,7 @@ class PredatorCell(MovableCell):
         valid_moves = [
             (row, col) for row, col in moves
             if 0 <= row < len(sub_grid) and 0 <= col < len(sub_grid[0]) and (
-                    not sub_grid[row][col].is_alive or sub_grid[row][col].cell_type == "Plant")
+                    not sub_grid[row][col].is_alive or sub_grid[row][col].cell_type == CELL_TYPE["Plant"])
         ]
 
         return valid_moves
@@ -56,7 +59,7 @@ class PredatorCell(MovableCell):
         for move_y, move_x in valid_moves:
             for row_idx, row in enumerate(sub_grid):
                 for col_idx, cell in enumerate(row):
-                    if cell.cell_type == "Herbivore" and cell.is_alive:
+                    if cell.cell_type == CELL_TYPE["Herbivore"] and cell.is_alive:
                         # Calculate Manhattan distance to the plant
                         distance = abs(row_idx - move_y) + abs(col_idx - move_x)
                         if distance < closest_distance:
