@@ -1,7 +1,13 @@
 from typing import List
 
-class Cell:
-    def __init__(self, y: int, x: int, cell_type: str, is_alive=True) -> None:
+from logger.observable import Observable
+from logger.file_logger import FileLogger
+
+
+class Cell(Observable):
+    def __init__(self, y: int, x: int, cell_type: str, file_logger_observer: FileLogger, is_alive=True) -> None:
+        super().__init__()
+        self.add_observer(file_logger_observer)
         self.is_alive = is_alive
         self.next_state = None
         self.cell_type = cell_type
@@ -10,9 +16,11 @@ class Cell:
 
     def kill(self) -> None:
         self.is_alive = False
+        self.notify_observers(f"Cell {self.cell_type} at ({self.y}, {self.x}) died.")
 
     def revival(self) -> None:
         self.is_alive = True
+        self.notify_observers(f"Cell {self.cell_type} at ({self.y}, {self.x}) revived.")
 
     def update_state(self) -> None:
         if self.next_state == "kill":
@@ -25,8 +33,9 @@ class Cell:
 
 
 class MovableCell(Cell):
-    def __init__(self, y: int, x: int, sight: int, cell_type: str, is_alive=True) -> None:
-        super().__init__(is_alive=is_alive, y=y, x=x, cell_type=cell_type)
+    def __init__(self, y: int, x: int, sight: int, cell_type: str, file_logger_observer: FileLogger,
+                 is_alive=True) -> None:
+        super().__init__(is_alive=is_alive, y=y, x=x, cell_type=cell_type, file_logger_observer=file_logger_observer)
         self.sight = sight
         self.next_x = -1
         self.next_y = -1

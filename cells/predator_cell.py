@@ -1,11 +1,15 @@
-from typing import List, Tuple
-from Cells.cell import *
 import random
+from typing import List, Tuple
+
+from cells.cell import Cell, MovableCell
+from logger.file_logger import FileLogger
 
 
 class PredatorCell(MovableCell):
-    def __init__(self, TTL: int, y: int, x: int, sight: int, is_alive=True, cell_type="Predator") -> None:
-        super().__init__(is_alive=is_alive, y=y, x=x, sight=sight, cell_type=cell_type)
+    def __init__(self, TTL: int, y: int, x: int, sight: int, file_logger_observer: FileLogger, is_alive=True,
+                 cell_type="Predator") -> None:
+        super().__init__(is_alive=is_alive, y=y, x=x, sight=sight, cell_type=cell_type,
+                         file_logger_observer=file_logger_observer)
         self.TTL = TTL
 
     def determine_next_state(self, neighbors: List[Cell]):
@@ -13,7 +17,6 @@ class PredatorCell(MovableCell):
             self.TTL -= 1
             if self.TTL == 0:
                 self.next_state = "kill"
-                return
 
     def determine_next_pos(self, sub_grid: List[List[Cell]]) -> None:
         self.move = True
@@ -40,7 +43,7 @@ class PredatorCell(MovableCell):
         valid_moves = [
             (row, col) for row, col in moves
             if 0 <= row < len(sub_grid) and 0 <= col < len(sub_grid[0]) and (
-                        not sub_grid[row][col].is_alive or sub_grid[row][col].cell_type == "Plant")
+                    not sub_grid[row][col].is_alive or sub_grid[row][col].cell_type == "Plant")
         ]
 
         return valid_moves
