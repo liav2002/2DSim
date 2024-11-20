@@ -8,6 +8,6 @@ class Observable:
     def remove_observer(self, observer):
         self.observers.remove(observer)
 
-    def notify_observers(self, event):
+    def notify_observers(self, event: tuple):
         for observer in self.observers:
             observer.update(event)
